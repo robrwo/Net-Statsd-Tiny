@@ -8,8 +8,6 @@ use Moo 1.000000;
 
 use IO::Socket 1.18 ();
 use IO::String;
-use Sub::Quote qw/ quote_sub /;
-use Sub::Util 1.40 qw/ set_subname /;
 
 our $VERSION = 'v0.3.0';
 
@@ -256,55 +254,40 @@ BEGIN {
     my $class = __PACKAGE__;
 
     my %PROTOCOL = (
-        set_add   => [ 's',   ],
-        counter   => [ 'c',   1 ],
-        gauge     => [ 'g',   ],
-        histogram => [ 'h',   ],
-        meter     => [ 'm',   ],
-        timing    => [ 'ms', 1 ],
+        set_add   => 's',
+        counter   => 'c',
+        gauge     => 'g',
+        histogram => 'h',
+        meter     => 'm',
+        timing    => 'ms',
     );
 
     foreach my $name ( keys %PROTOCOL ) {
 
-        no strict 'refs'; ## no critic (ProhibitNoStrict)
+        no strict 'refs';    ## no critic (ProhibitNoStrict)
 
-        my $rate = $PROTOCOL{$name}[1];
+        my $tmpl = '%s:%s|' . $PROTOCOL{$name};
 
-        my $code =
-          defined $rate
-          ? q{ my ($self, $metric, $value, $rate) = @_; }
-          : q{ my ($self, $metric, $value) = @_; };
-
-        my $tmpl = '%s:%s|' . $PROTOCOL{$name}[0];
-
-        if ( defined $rate ) {
-
-            $code .= q/ if ((defined $rate) && ($rate<1)) {
-                     $self->_record( $tmpl . '|@%f', $metric, $value, $rate );
-                   } else {
-                     $self->_record( $tmpl, $metric, $value ); } /;
-        }
-        else {
-
-            $code .= q{$self->_record( $tmpl, $metric, $value );};
-
-        }
-
-        quote_sub "${class}::${name}", $code,
-          { '$tmpl' => \$tmpl },
-          { no_defer => 1 };
-
+        *{"${class}::${name}"} = sub {
+            my ( $self, $metric, $value, $rate ) = @_;
+            if ( ( defined $rate ) && ( $rate < 1 ) ) {
+                $self->_record( $tmpl . '|@%f', $metric, $value, $rate );
+            }
+            else {
+                $self->_record( $tmpl, $metric, $value );
+            }
+        };
 
     }
 
     # Alises for other Net::Statsd::Client or Etsy::StatsD
 
     {
-        no strict 'refs'; ## no critic (ProhibitNoStrict)
+        no strict 'refs';    ## no critic (ProhibitNoStrict)
 
-        *{"${class}::update"}    = set_subname "update"    => \&counter;
-        *{"${class}::timing_ms"} = set_subname "timing_ms" => \&timing;
-        *{"${class}::add_set"}   = set_subname "timing_ms" => \&set_add;
+        *{"${class}::update"}    = \&counter;
+        *{"${class}::timing_ms"} = \&timing;
+        *{"${class}::add_set"}   = \&set_add;
 
     }
 
