@@ -4,7 +4,7 @@ package Net::Statsd::Tiny;
 
 use v5.6;
 
-use Moo 1.000000;
+use base qw/ Class::Accessor /;
 
 use IO::Socket 1.18 ();
 use IO::String;
@@ -60,45 +60,53 @@ The host of the statsd daemon. It defaults to C<127.0.0.1>.
 
 =cut
 
-has host => (
-    is      => 'ro',
-    default => '127.0.0.1',
+__PACKAGE__->mk_ro_accessors(
+    qw/ host port proto prefix
+      autoflush max_buffer_size _buffer _socket /
 );
+
+sub new {
+    my ( $class, @args ) = @_;
+
+    my %args;
+    if ( ( @args == 1 ) && ( ref( $args[0] ) eq 'HASH' ) ) {
+        %args = %{ $args[0] };
+    }
+    else {
+        %args = @args;
+    }
+
+    $args{host}            = '127.0.0.1' unless defined $args{host};
+    $args{port}            = 8125        unless defined $args{port};
+    $args{proto}           = 'udp'       unless defined $args{proto};
+    $args{prefix}          = ''          unless defined $args{prefix};
+    $args{autoflush}       = 1           unless defined $args{autoflush};
+    $args{max_buffer_size} = 512         unless defined $args{max_buffer_size};
+
+    $args{_buffer} = IO::String->new;
+
+    $args{_socket} = IO::Socket::INET->new(
+        PeerAddr => $args{host},
+        PeerPort => $args{port},
+        Proto    => $args{proto},
+    ) or die "Failed to initialize socket: $!";
+
+    $class->SUPER::new( \%args );
+}
 
 =attribute C<port>
 
 The port that the statsd daemon is listening on. It defaults to
 C<8125>.
 
-=cut
-
-has port => (
-    is      => 'ro',
-    default => 8125,
-);
-
 =attribute C<proto>
 
 The network protocol that the statsd daemon is using. It defaults to
 C<udp>.
 
-=cut
-
-has proto => (
-    is      => 'ro',
-    default => 'udp',
-);
-
 =attribute C<prefix>
 
 The prefix to prepend to metric names. It defaults to a blank string.
-
-=cut
-
-has prefix => (
-    is      => 'ro',
-    default => '',
-);
 
 =attribute C<autoflush>
 
@@ -114,44 +122,9 @@ regularly at the end of each task (e.g. a website request or job).
 Not all StatsD daemons support receiving multiple metrics in a single
 packet.
 
-=cut
-
-has autoflush => (
-    is      => 'ro',
-    default => 1,
-);
-
-has _buffer => (
-    is      => 'lazy',
-    builder => sub {
-        IO::String->new;
-    },
-);
-
 =attribute C<max_buffer_size>
 
 The specifies the maximum buffer size. It defaults to C<512>.
-
-=cut
-
-has max_buffer_size => (
-    is      => 'ro',
-    default => 512,
-);
-
-has _socket => (
-    is      => 'lazy',
-    builder => sub {
-        my ($self) = shift;
-        my $sock = IO::Socket::INET->new(
-            PeerAddr => $self->host,
-            PeerPort => $self->port,
-            Proto    => $self->proto,
-        ) or die "Failed to initialize socket: $!";
-        return $sock;
-    },
-    handles => { _send => 'send' },
-);
 
 =head1 METHODS
 
@@ -341,7 +314,7 @@ sub flush {
     my $data = ${ $fh->string_ref };
 
     if ( length($data) ) {
-        $self->_send( $data, 0 );
+        $self->_socket->send( $data, 0 );
         $fh->truncate;
     }
 }
