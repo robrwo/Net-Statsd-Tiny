@@ -2,22 +2,18 @@ package Net::Statsd::Tiny;
 
 # ABSTRACT: A tiny StatsD client
 
-# RECOMMEND PREREQ: Type::Tiny::XS
-
 use v5.10;
 
 use Moo 1.000000;
 
 use IO::Socket 1.18 ();
 use IO::String;
-use MooX::TypeTiny;
 use Sub::Quote qw/ quote_sub /;
 use Sub::Util 1.40 qw/ set_subname /;
-use Net::Statsd::Tiny::Types -types;
 
 use namespace::autoclean;
 
-our $VERSION = 'v0.2.2';
+our $VERSION = 'v0.3.0';
 
 =head1 SYNOPSIS
 
@@ -57,8 +53,8 @@ It supports the following features:
 Note that the specification requires the measured values to be
 integers no larger than 64-bits, but ideally 53-bits.
 
-The current implementation expects values to be integers, except where
-specified. But it otherwise does not enforce maximum/minimum values.
+The current implementation does not validate the values. If you want
+validation, see L<Net::Statsd::Lite>.
 
 =head1 ATTRIBUTES
 
@@ -70,7 +66,6 @@ The host of the statsd daemon. It defaults to C<127.0.0.1>.
 
 has host => (
     is      => 'ro',
-    isa     => Str,
     default => '127.0.0.1',
 );
 
@@ -83,7 +78,6 @@ C<8125>.
 
 has port => (
     is      => 'ro',
-    isa     => Port,
     default => 8125,
 );
 
@@ -96,7 +90,6 @@ C<udp>.
 
 has proto => (
     is      => 'ro',
-    isa     => Enum [qw/ tcp udp /],
     default => 'udp',
 );
 
@@ -108,7 +101,6 @@ The prefix to prepend to metric names. It defaults to a blank string.
 
 has prefix => (
     is      => 'ro',
-    isa     => Str,
     default => '',
 );
 
@@ -130,13 +122,11 @@ packet.
 
 has autoflush => (
     is      => 'ro',
-    isa     => Bool,
     default => 1,
 );
 
 has _buffer => (
     is      => 'lazy',
-    isa     => InstanceOf ['IO::String'],
     builder => sub {
         IO::String->new;
     },
@@ -150,13 +140,11 @@ The specifies the maximum buffer size. It defaults to C<512>.
 
 has max_buffer_size => (
     is      => 'ro',
-    isa     => PosInt,
     default => 512,
 );
 
 has _socket => (
     is      => 'lazy',
-    isa     => InstanceOf ['IO::Socket::INET'],
     builder => sub {
         my ($self) = shift;
         my $sock = IO::Socket::INET->new(
@@ -270,30 +258,24 @@ BEGIN {
     my $class = __PACKAGE__;
 
     my %PROTOCOL = (
-        set_add   => [ 's',  Str, ],
-        counter   => [ 'c',  Int, 1 ],
-        gauge     => [ 'g',  Gauge | PosInt ],
-        histogram => [ 'h',  PosNum ],
-        meter     => [ 'm',  PosInt ],
-        timing    => [ 'ms', PosNum, 1 ],
+        set_add   => [ 's',   ],
+        counter   => [ 'c',   1 ],
+        gauge     => [ 'g',   ],
+        histogram => [ 'h',   ],
+        meter     => [ 'm',   ],
+        timing    => [ 'ms', 1 ],
     );
 
     foreach my $name ( keys %PROTOCOL ) {
 
         no strict 'refs'; ## no critic (ProhibitNoStrict)
 
-        my $type = $PROTOCOL{$name}[1];
-        my $rate = $PROTOCOL{$name}[2];
+        my $rate = $PROTOCOL{$name}[1];
 
         my $code =
           defined $rate
           ? q{ my ($self, $metric, $value, $rate) = @_; }
           : q{ my ($self, $metric, $value) = @_; };
-
-        $code .= $type->inline_assert('$value');
-
-        $code .= q/ if (defined $rate) { / . Rate->inline_assert('$rate') . ' }'
-          if defined $rate;
 
         my $tmpl = '%s:%s|' . $PROTOCOL{$name}[0];
 
@@ -392,6 +374,9 @@ sub DEMOLISH {
 }
 
 =head1 SEE ALSO
+
+L<Net::Statsd::Lite> which has a similar API but uses L<Moo> and
+L<Type::Tiny> for data validation.
 
 L<https://github.com/b/statsd_spec>
 
