@@ -3,7 +3,6 @@ requires "IO::String" => "0";
 requires "Moo" => "1.000000";
 requires "Sub::Quote" => "0";
 requires "Sub::Util" => "1.40";
-requires "namespace::autoclean" => "0";
 requires "perl" => "v5.10.0";
 requires "strict" => "0";
 requires "warnings" => "0";

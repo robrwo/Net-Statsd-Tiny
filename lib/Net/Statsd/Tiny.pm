@@ -11,8 +11,6 @@ use IO::String;
 use Sub::Quote qw/ quote_sub /;
 use Sub::Util 1.40 qw/ set_subname /;
 
-use namespace::autoclean;
-
 our $VERSION = 'v0.3.0';
 
 =head1 SYNOPSIS
