@@ -2,7 +2,10 @@ package Net::Statsd::Tiny;
 
 # ABSTRACT: A tiny StatsD client
 
-use v5.6;
+use v5.8;
+
+use strict;
+use warnings;
 
 use base qw/ Class::Accessor /;
 
