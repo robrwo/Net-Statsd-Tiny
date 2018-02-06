@@ -1,7 +1,7 @@
 requires "IO::Socket" => "1.18";
 requires "IO::String" => "0";
 requires "Moo" => "1.000000";
-requires "perl" => "v5.8.0";
+requires "perl" => "v5.6.0";
 requires "strict" => "0";
 requires "warnings" => "0";
 

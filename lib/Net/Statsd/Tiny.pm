@@ -2,7 +2,7 @@ package Net::Statsd::Tiny;
 
 # ABSTRACT: A tiny StatsD client
 
-use v5.8;
+use v5.6;
 
 use Moo 1.000000;
 
