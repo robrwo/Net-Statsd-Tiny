@@ -4,6 +4,7 @@ Revision history for Net-Statsd-Tiny
   [Enhancements]
   - Removed the use of Type::Tiny, #2
   - Removed use of Sub::Quote/Sub::Utils, #2
+  - Minimum version is now Perl 5.8.
 
 v0.2.1    2018-02-06 09:25:32+00:00 Europe/London
   [Tests]

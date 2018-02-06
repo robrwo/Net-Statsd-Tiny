@@ -2,7 +2,7 @@ package Net::Statsd::Tiny;
 
 # ABSTRACT: A tiny StatsD client
 
-use v5.10;
+use v5.8;
 
 use Moo 1.000000;
 
@@ -321,7 +321,7 @@ sub _record {
         $self->flush;
     }
 
-    say {$fh} $data;
+    print {$fh} $data . "\n";
 
     $self->flush if $self->autoflush;
 }
