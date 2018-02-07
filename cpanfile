@@ -1,6 +1,5 @@
-requires "Class::Accessor" => "0";
+requires "Class::Accessor::Fast" => "0";
 requires "IO::Socket" => "1.18";
-requires "IO::String" => "0";
 requires "base" => "0";
 requires "perl" => "v5.8.0";
 requires "strict" => "0";

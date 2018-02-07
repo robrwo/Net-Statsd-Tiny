@@ -7,10 +7,9 @@ use v5.8;
 use strict;
 use warnings;
 
-use base qw/ Class::Accessor /;
+use base qw/ Class::Accessor::Fast /;
 
 use IO::Socket 1.18 ();
-use IO::String;
 
 our $VERSION = 'v0.3.0';
 
@@ -65,7 +64,7 @@ The host of the statsd daemon. It defaults to C<127.0.0.1>.
 
 __PACKAGE__->mk_ro_accessors(
     qw/ host port proto prefix
-      autoflush max_buffer_size _buffer _socket /
+      autoflush max_buffer_size _socket /
 );
 
 sub new {
@@ -93,15 +92,17 @@ sub new {
         $args{$attr} = $DEFAULTS{$attr};
     }
 
-    $args{_buffer} = IO::String->new;
-
     $args{_socket} = IO::Socket::INET->new(
         PeerAddr => $args{host},
         PeerPort => $args{port},
         Proto    => $args{proto},
     ) or die "Failed to initialize socket: $!";
 
-    $class->SUPER::new( \%args );
+    my $self = $class->SUPER::new( \%args );
+
+    $self->{_buffer} = '';
+
+    return $self;
 }
 
 =attribute C<port>
@@ -249,15 +250,16 @@ BEGIN {
 
         no strict 'refs';    ## no critic (ProhibitNoStrict)
 
-        my $tmpl = '%s:%s|' . $PROTOCOL{$name};
+        my $suffix = '|' . $PROTOCOL{$name};
 
         *{"${class}::${name}"} = sub {
             my ( $self, $metric, $value, $rate ) = @_;
             if ( ( defined $rate ) && ( $rate < 1 ) ) {
-                $self->_record( $tmpl . '|@%f', $metric, $value, $rate );
+                $self->_record( $suffix . '|@' . $rate, $metric, $value )
+                    if rand() < $rate;
             }
             else {
-                $self->_record( $tmpl, $metric, $value );
+                $self->_record( $suffix, $metric, $value );
             }
         };
 
@@ -287,27 +289,21 @@ sub decrement {
 }
 
 sub _record {
-    my ( $self, $template, @args ) = @_;
+    my ( $self, $suffix, $metric, $value ) = @_;
 
-    my $data = $self->prefix . sprintf( $template, @args );
+    my $data = $self->prefix . $metric . ':' . $value . $suffix . "\n";
 
-    my $fh  = $self->_buffer;
-    my $len = length($data);
-
-    if ( $len >= $self->max_buffer_size ) {
-        warn "Data is too large";
-        return $self;
+    if ( $self->autoflush ) {
+        send( $self->_socket, $data, 0 );
+        return;
     }
 
-    $len += length( ${ $fh->string_ref } );
-    if ( $len >= $self->max_buffer_size ) {
-        $self->flush;
-    }
+    my $avail = $self->max_buffer_size - length( $self->{_buffer} );
+    $self->flush if length($data) > $avail;
 
-    print {$fh} $data . "\n";
-
-    $self->flush if $self->autoflush;
+    $self->{_buffer} .= $data;
 }
+
 
 =method C<flush>
 
@@ -319,13 +315,10 @@ is any data in the buffer.
 sub flush {
     my ($self) = @_;
 
-    my $fh = $self->_buffer;
 
-    my $data = ${ $fh->string_ref };
-
-    if ( length($data) ) {
-        $self->_socket->send( $data, 0 );
-        $fh->truncate;
+    if ( length($self->{_buffer}) ) {
+        send( $self->_socket, $self->{_buffer}, 0 );
+        $self->{_buffer} = '';
     }
 }
 
