@@ -1,6 +1,6 @@
 # NAME
 
-Net::Statsd::Tiny - A tiny StatsD client
+Net::Statsd::Tiny - A tiny StatsD client that supports multimetric packets
 
 # VERSION
 
