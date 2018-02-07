@@ -8,6 +8,9 @@ Revision history for Net-Statsd-Tiny
 
   - Backported improvements from Net::Statsd::Lite v0.4.0.
 
+  [Bug Fixes]
+  - Sample rates are honoured properly.
+
 v0.2.1    2018-02-06 09:25:32+00:00 Europe/London
   [Tests]
   - Specified a minimum Test::TCP version.
