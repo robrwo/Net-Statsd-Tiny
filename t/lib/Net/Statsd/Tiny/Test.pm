@@ -2,8 +2,6 @@ package Net::Statsd::Tiny::Test;
 
 use Test::Roo::Role;
 
-use Carp;
-use curry;
 use IO::Select;
 use Net::EmptyPort qw/ listen_socket /;
 
@@ -52,7 +50,7 @@ has output => (
 test "test client" => sub {
     my ($self) = @_;
 
-    my $result = $self->test_udp( $self->curry::send_tests );
+    my $result = $self->test_udp( sub { $self->send_tests(@_) } );
 
   TODO: {
 
@@ -82,7 +80,7 @@ sub test_udp {
     my ( $self, $callback ) = @_;
 
     my $socket = listen_socket( { proto => $self->proto } )
-        or croak $!;
+        or die $!;
 
     my $pid = fork;
     if ($pid) {
@@ -121,7 +119,7 @@ sub test_udp {
         exit 0;
     }
     else {
-        croak $!;
+        die $!;
     }
 
 }

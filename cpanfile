@@ -6,7 +6,6 @@ requires "strict" => "0";
 requires "warnings" => "0";
 
 on 'test' => sub {
-  requires "Carp" => "0";
   requires "Devel::StrictMode" => "0";
   requires "File::Spec" => "0";
   requires "IO::Select" => "0";
@@ -17,7 +16,6 @@ on 'test' => sub {
   requires "Test::Roo::DataDriven" => "0";
   requires "Test::Roo::Role" => "0";
   requires "Test::TCP" => "2.19";
-  requires "curry" => "0";
   requires "if" => "0";
   requires "lib" => "0";
   requires "utf8" => "0";
