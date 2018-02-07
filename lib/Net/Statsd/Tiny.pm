@@ -79,12 +79,19 @@ sub new {
         %args = @args;
     }
 
-    $args{host}            = '127.0.0.1' unless defined $args{host};
-    $args{port}            = 8125        unless defined $args{port};
-    $args{proto}           = 'udp'       unless defined $args{proto};
-    $args{prefix}          = ''          unless defined $args{prefix};
-    $args{autoflush}       = 1           unless defined $args{autoflush};
-    $args{max_buffer_size} = 512         unless defined $args{max_buffer_size};
+    my %DEFAULTS = (
+        host            => '127.0.0.1',
+        port            => 8125,
+        proto           => 'udp',
+        prefix          => '',
+        autoflush       => 1,
+        max_buffer_size => 512,
+    );
+
+    foreach my $attr ( keys %DEFAULTS ) {
+        next if exists $args{$attr};
+        $args{$attr} = $DEFAULTS{$attr};
+    }
 
     $args{_buffer} = IO::String->new;
 
