@@ -1,8 +1,8 @@
 package Net::Statsd::Tiny;
 
-# ABSTRACT: A tiny StatsD client
+# ABSTRACT: A tiny StatsD client that supports multimetric packets
 
-use v5.8;
+use v5.10.1;
 
 use strict;
 use warnings;
@@ -314,7 +314,6 @@ is any data in the buffer.
 
 sub flush {
     my ($self) = @_;
-
 
     if ( length($self->{_buffer}) ) {
         send( $self->_socket, $self->{_buffer}, 0 );

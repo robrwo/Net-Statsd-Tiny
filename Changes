@@ -4,8 +4,6 @@ Revision history for Net-Statsd-Tiny
   [Enhancements]
   - Remove the use of most prereqs, so that this module is "Tiny", #2.
 
-  - Minimum version is now Perl 5.8.
-
   - Backported improvements from Net::Statsd::Lite v0.4.0.
 
   [Bug Fixes]
