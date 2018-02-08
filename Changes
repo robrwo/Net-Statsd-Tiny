@@ -1,6 +1,8 @@
 Revision history for Net-Statsd-Tiny
 
 {{$NEXT}}
+  [Documentation]
+  - Rewrote the section about data validation.
 
 v0.3.0    2018-02-07 23:35:15+00:00 Europe/London
   [Enhancements]
