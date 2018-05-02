@@ -4,6 +4,9 @@ Revision history for Net-Statsd-Tiny
   [Documentation]
   - Rewrote the section about data validation.
 
+  [Toolchain]
+  - Removed core and redundant prereqs.
+
 v0.3.0    2018-02-07 23:35:15+00:00 Europe/London
   [Enhancements]
   - Remove the use of most prereqs, so that this module is "Tiny", #2.
