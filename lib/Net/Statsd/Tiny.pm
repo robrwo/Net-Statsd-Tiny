@@ -233,11 +233,6 @@ specification recommends that integers be used.
 This adds the the C<$string> to a set, for logging the number of
 unique things, e.g. IP addresses or usernames.
 
-=method C<add_set>
-
-This is an alias for L</set_add>. It is deprecated and will be removed
-in a later version.
-
 =cut
 
 BEGIN {
@@ -278,7 +273,6 @@ BEGIN {
 
         *{"${class}::update"}    = \&counter;
         *{"${class}::timing_ms"} = \&timing;
-        *{"${class}::add_set"}   = \&set_add;
 
     }
 
