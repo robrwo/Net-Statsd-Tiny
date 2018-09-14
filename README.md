@@ -4,7 +4,7 @@ Net::Statsd::Tiny - A tiny StatsD client that supports multimetric packets
 
 # VERSION
 
-version v0.3.2
+version v0.3.3
 
 # SYNOPSIS
 
