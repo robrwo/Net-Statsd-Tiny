@@ -332,7 +332,7 @@ sub DEMOLISH {
 =head1 SEE ALSO
 
 L<Net::Statsd::Lite> which has a similar API but uses L<Moo> and
-L<Type::Tiny> for data validation.
+L<Type::Tiny> for data validation. It's also faster.
 
 L<https://github.com/b/statsd_spec>
 
