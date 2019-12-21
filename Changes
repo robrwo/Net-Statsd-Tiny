@@ -1,6 +1,8 @@
 Revision history for Net-Statsd-Tiny
 
 {{$NEXT}}
+
+v0.3.5    2019-12-21 10:21:06+00:00 Europe/London
   [Documentation]
   - Fixed typo, thanks @mrdvt92.
 
