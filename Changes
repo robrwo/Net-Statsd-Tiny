@@ -7,6 +7,9 @@ Revision history for Net-Statsd-Tiny
   [Tests]
   - Bumped minimum version prerequisite for Test::TCP.
 
+  [Other]
+  - Added keywords to module metadata.
+
 v0.3.4    2019-07-21 11:31:26+01:00 Europe/London
   [Documentation]
   - Fixed copyright year.
