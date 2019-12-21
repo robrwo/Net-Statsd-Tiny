@@ -141,7 +141,7 @@ packet.
 
 =attribute C<max_buffer_size>
 
-The specifies the maximum buffer size. It defaults to C<512>.
+Specifies the maximum buffer size. It defaults to C<512>.
 
 =head1 METHODS
 
