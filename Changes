@@ -6,6 +6,8 @@ Revision history for Net-Statsd-Tiny
 
   - Fix typo in SYNOPSIS for the set_add method.
 
+  - Fix encoding of links in README.
+
   [Tests]
   - Switched package used for the release manifest.
 
