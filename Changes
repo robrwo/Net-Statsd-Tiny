@@ -1,6 +1,8 @@
 Revision history for Net-Statsd-Tiny
 
 {{$NEXT}}
+  [Documentation]
+  - Fix typo in SYNOPSIS for the set_add method.
 
 v0.3.6    2020-07-31 14:47:58+01:00 Europe/London
   [Documentation]
