@@ -11,7 +11,7 @@ use base qw/ Class::Accessor::Fast /;
 
 use IO::Socket 1.18 ();
 
-our $VERSION = 'v0.3.7';
+our $VERSION = 'v0.3.8';
 
 =head1 SYNOPSIS
 
