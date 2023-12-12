@@ -11,6 +11,9 @@ Revision history for Net-Statsd-Tiny
   [Tests]
   - Switched package used for the release manifest.
 
+  [Other]
+  - Signed the release.
+
 v0.3.6    2020-07-31 14:47:58+01:00 Europe/London
   [Documentation]
   - Update copyright year.
