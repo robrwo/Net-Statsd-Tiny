@@ -203,6 +203,12 @@ unique things, e.g. IP addresses or usernames.
 This sends the buffer to the ["host"](#host) and empties the buffer, if there
 is any data in the buffer.
 
+# SUPPORT FOR OLDER PERL VERSIONS
+
+This module requires Perl v5.10.1 or later.
+
+Future releases may only support Perl versions released in the last ten years.
+
 # SEE ALSO
 
 [Net::Statsd::Lite](https://metacpan.org/pod/Net%3A%3AStatsd%3A%3ALite) which has a similar API but uses [Moo](https://metacpan.org/pod/Moo) and

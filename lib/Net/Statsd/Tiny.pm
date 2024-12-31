@@ -329,6 +329,12 @@ sub DEMOLISH {
     $self->flush;
 }
 
+=head1 SUPPORT FOR OLDER PERL VERSIONS
+
+This module requires Perl v5.10.1 or later.
+
+Future releases may only support Perl versions released in the last ten years.
+
 =head1 SEE ALSO
 
 L<Net::Statsd::Lite> which has a similar API but uses L<Moo> and
