@@ -63,7 +63,7 @@ some daemons may ignore or reject this.
 
 =head1 ATTRIBUTES
 
-=attribute C<host>
+=attr C<host>
 
 The host of the statsd daemon. It defaults to C<127.0.0.1>.
 
@@ -112,21 +112,21 @@ sub new {
     return $self;
 }
 
-=attribute C<port>
+=attr C<port>
 
 The port that the statsd daemon is listening on. It defaults to
 C<8125>.
 
-=attribute C<proto>
+=attr C<proto>
 
 The network protocol that the statsd daemon is using. It defaults to
 C<udp>.
 
-=attribute C<prefix>
+=attr C<prefix>
 
 The prefix to prepend to metric names. It defaults to a blank string.
 
-=attribute C<autoflush>
+=attr C<autoflush>
 
 A flag indicating whether metrics will be send immediately. It
 defaults to true.
@@ -140,7 +140,7 @@ regularly at the end of each task (e.g. a website request or job).
 Not all StatsD daemons support receiving multiple metrics in a single
 packet.
 
-=attribute C<max_buffer_size>
+=attr C<max_buffer_size>
 
 Specifies the maximum buffer size. It defaults to C<512>.
 
@@ -333,12 +333,6 @@ sub DEMOLISH {
     $self->flush;
 }
 
-=head1 SUPPORT FOR OLDER PERL VERSIONS
-
-This module requires Perl v5.10.1 or later.
-
-Future releases may only support Perl versions released in the last ten years.
-
 =head1 SEE ALSO
 
 L<Net::Statsd::Lite> which has a similar API but uses L<Moo> and
@@ -351,7 +345,14 @@ L<https://github.com/b/statsd_spec>
 The initial development of this module was sponsored by Science Photo
 Library L<https://www.sciencephoto.com>.
 
-=head1 append:BUGS
+=head1 prepend:SUPPORT
+
+Only the latest version of this module will be supported.
+
+This module requires Perl v5.10.1 or later.
+Future releases may only support Perl versions released in the last ten (10) years.
+
+=head1 append:SUPPORT
 
 =head2 Reporting Security Vulnerabilities
 
