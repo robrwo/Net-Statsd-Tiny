@@ -37,6 +37,7 @@ on 'configure' => sub {
 
 on 'develop' => sub {
   requires "Pod::Coverage::TrustPod" => "0";
+  requires "Software::Security::Policy::Individual" => "0";
   requires "Test::DistManifest" => "0";
   requires "Test::EOF" => "0";
   requires "Test::EOL" => "0";
