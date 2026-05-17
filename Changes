@@ -8,6 +8,8 @@ Revision history for Net-Statsd-Tiny
   [Documentation]
   - Generate the README with the UsefulReadme plugin.
 
+  - Added a SECURITY CONSIDERATIONS section to the POD.
+
   - Add a security policy.
 
   - Documented the Perl version support policy.

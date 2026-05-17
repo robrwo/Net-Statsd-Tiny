@@ -54,6 +54,7 @@ Changes for version v0.3.8 (2026-05-17)
     - Metrics names and values are now validated to ensure they do not contain characters below ASCII 32 (including newlines), colon (":") or pipe ("|") characters that might allow metric injection. CVE-2026-46720
 - Documentation
     - Generate the README with the UsefulReadme plugin.
+    - Added a SECURITY CONSIDERATIONS section to the POD.
     - Add a security policy.
     - Documented the Perl version support policy.
     - Updated copyright year.
@@ -113,6 +114,22 @@ dzil install --install-command="cpan ."
 ```
 
 For more information, see the `INSTALL` file included with this distribution.
+
+# SECURITY CONSIDERATIONS
+
+When using the ["set\_add"](#set_add) method, be wary of exposing sensitive information like IP addresses, usernames, email addresses or even session ids over insecure channels.  One workaround is to log a message digest of the value instead, for example
+
+```perl
+use Digest::SHA qw/ hmac_sha1 /;
+
+...
+
+$tats->set_key( "myapp.sessions", hmac_sha1( $session->id, $my_secret_key );
+```
+
+Note that the keys should be consistent across woprker processes and hosts.
+
+When generating metric names based on untrusted sources (such as HTTP requests), ensure that the metrics contain only printable characters and do not contain colons (":") or pipes ("|"), since these are used by the statsd protocol.
 
 # SUPPORT
 
