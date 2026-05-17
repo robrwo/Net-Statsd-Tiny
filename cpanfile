@@ -40,6 +40,7 @@ on 'develop' => sub {
   requires "Test::DistManifest" => "0";
   requires "Test::EOF" => "0";
   requires "Test::EOL" => "0";
+  requires "Test::Fixme" => "0";
   requires "Test::Kwalitee" => "1.21";
   requires "Test::MinimumVersion" => "0";
   requires "Test::More" => "0.88";

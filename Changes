@@ -16,6 +16,9 @@ Revision history for Net-Statsd-Tiny
 
   - Fixed SOURCE link.
 
+  [Tests]
+  - Moved author tests into xt directory.
+
   [Toolchain]
   - Stopped signing releases with Module::Signature.
 
