@@ -6,6 +6,8 @@ Revision history for Net-Statsd-Tiny
     colon (":") or pipe ("|") characters that might allow metric injection. CVE-2026-46720
 
   [Documentation]
+  - Generate the README with the UsefulReadme plugin.
+
   - Add a security policy.
 
   - Documented the Perl version support policy.
