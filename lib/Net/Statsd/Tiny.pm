@@ -2,12 +2,11 @@ package Net::Statsd::Tiny;
 
 # ABSTRACT: A tiny StatsD client that supports multimetric packets
 
-use v5.10.1;
+use v5.12;
 
-use strict;
 use warnings;
 
-use base qw/ Class::Accessor::Fast /;
+use parent qw/ Class::Accessor::Fast /;
 
 use Carp ();
 use IO::Socket 1.18 ();
@@ -370,7 +369,7 @@ Library L<https://www.sciencephoto.com>.
 
 Only the latest version of this module will be supported.
 
-This module requires Perl v5.10.1 or later.
+This module requires Perl v5.12 or later.
 Future releases may only support Perl versions released in the last ten (10) years.
 
 =head1 append:SUPPORT

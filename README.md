@@ -50,6 +50,8 @@ some daemons may ignore or reject this.
 
 Changes for version v0.3.9 (2026-05-18)
 
+- Incompatabilities
+    - Bumped the minimum Perl version to 5.12.
 - Security
     - Upgraded minimum versions of some prerequisites to exclude known vulnerabilities.
 - Documentation
@@ -68,8 +70,8 @@ This module lists the following modules as runtime dependencies:
 - [Class::Accessor::Fast](https://metacpan.org/pod/Class%3A%3AAccessor%3A%3AFast)
 - [IO::Socket](https://metacpan.org/pod/IO%3A%3ASocket) version 1.18 or later
 - [Socket](https://metacpan.org/pod/Socket) version 2.026 or later
-- [base](https://metacpan.org/pod/base)
-- [perl](https://metacpan.org/pod/perl) version v5.10.1 or later
+- [parent](https://metacpan.org/pod/parent)
+- [perl](https://metacpan.org/pod/perl) version v5.12.0 or later
 - [strict](https://metacpan.org/pod/strict)
 - [warnings](https://metacpan.org/pod/warnings)
 
@@ -128,7 +130,7 @@ When generating metric names based on untrusted sources (such as HTTP requests),
 
 Only the latest version of this module will be supported.
 
-This module requires Perl v5.10.1 or later.
+This module requires Perl v5.12 or later.
 Future releases may only support Perl versions released in the last ten (10) years.
 
 Please report any bugs or feature requests on the bugtracker website

@@ -5,8 +5,8 @@ requires "Carp" => "0";
 requires "Class::Accessor::Fast" => "0";
 requires "IO::Socket" => "1.18";
 requires "Socket" => "2.026";
-requires "base" => "0";
-requires "perl" => "v5.10.1";
+requires "parent" => "0";
+requires "perl" => "v5.12.0";
 requires "strict" => "0";
 requires "warnings" => "0";
 
