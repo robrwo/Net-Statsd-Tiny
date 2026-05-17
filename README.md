@@ -48,23 +48,10 @@ some daemons may ignore or reject this.
 
 # RECENT CHANGES
 
-Changes for version v0.3.8 (2026-05-17)
+Changes for version v0.3.9 (2026-05-17)
 
-- Security
-    - Metrics names and values are now validated to ensure they do not contain characters below ASCII 32 (including newlines), colon (":") or pipe ("|") characters that might allow metric injection. CVE-2026-46720
 - Documentation
-    - Generate the README with the UsefulReadme plugin.
-    - Added a SECURITY CONSIDERATIONS section to the POD.
-    - Added a security policy.
-    - Documented the Perl version support policy.
-    - Updated copyright year.
-    - Updated author email address.
-    - Fixed SOURCE link.
-- Tests
-    - Moved author tests into xt directory.
-- Toolchain
-    - Stopped signing releases with Module::Signature.
-    - Reorganised Dist::Zilla and Pod::Weaver configuration.
+    - Added SPDX Licence Snippet to borrowed test code.
 
 See the `Changes` file for more details.
 
