@@ -12,7 +12,7 @@ use base qw/ Class::Accessor::Fast /;
 use Carp ();
 use IO::Socket 1.18 ();
 
-our $VERSION = 'v0.3.8';
+our $VERSION = 'v0.3.9';
 
 =head1 SYNOPSIS
 
