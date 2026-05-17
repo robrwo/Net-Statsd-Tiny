@@ -4,10 +4,16 @@
 requires "Carp" => "0";
 requires "Class::Accessor::Fast" => "0";
 requires "IO::Socket" => "1.18";
+requires "Socket" => "2.026";
 requires "base" => "0";
 requires "perl" => "v5.10.1";
 requires "strict" => "0";
 requires "warnings" => "0";
+
+on 'build' => sub {
+  requires "ExtUtils::MakeMaker" => "7.22";
+  requires "Module::Metadata" => "1.000015";
+};
 
 on 'test' => sub {
   requires "Devel::StrictMode" => "0";
@@ -15,9 +21,8 @@ on 'test' => sub {
   requires "IO::Handle" => "0";
   requires "IO::Select" => "0";
   requires "IPC::Open3" => "0";
-  requires "Module::Metadata" => "0";
+  requires "Module::Metadata" => "1.000015";
   requires "Net::EmptyPort" => "0";
-  requires "Socket" => "0";
   requires "Test::More" => "0";
   requires "Test::Roo" => "0";
   requires "Test::Roo::DataDriven" => "0";
@@ -45,7 +50,7 @@ on 'develop' => sub {
   requires "Pod::Coverage::TrustPod" => "0";
   requires "Pod::Markdown::Github" => "0";
   requires "Pod::Wordlist" => "0";
-  requires "Software::Security::Policy::Individual" => "0";
+  requires "Software::Security::Policy::Individual" => "0.10";
   requires "Test2::Require::AuthorTesting" => "0";
   requires "Test2::Tools::Basic" => "1.302200";
   requires "Test2::V0" => "0";
@@ -68,7 +73,7 @@ on 'develop' => sub {
   requires "Test::Portability::Files" => "0";
   requires "Test::Spelling" => "0.17";
   requires "Test::TrailingSpace" => "0.0203";
-  requires "Test::Vars" => "0";
+  requires "Test::Vars" => "0.015";
   requires "Test::Version" => "1";
   requires "perl" => "v5.14.0";
 };
