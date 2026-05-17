@@ -4,6 +4,11 @@ Revision history for Net-Statsd-Tiny
   [Documentation]
   - Added SPDX Licence Snippet to borrowed test code.
 
+  - Fixed typos.
+
+  [Tests]
+  - Add more author tests.
+
 v0.3.8    2026-05-17 18:05:47+01:00 Europe/London
   [Security]
   - Metrics names and values are now validated to ensure they do not contain characters below ASCII 32 (including newlines),

@@ -48,10 +48,13 @@ some daemons may ignore or reject this.
 
 # RECENT CHANGES
 
-Changes for version v0.3.9 (2026-05-17)
+Changes for version v0.3.9 (2026-05-18)
 
 - Documentation
     - Added SPDX Licence Snippet to borrowed test code.
+    - Fixed typos.
+- Tests
+    - Add more author tests.
 
 See the `Changes` file for more details.
 
@@ -114,7 +117,7 @@ use Digest::SHA qw/ hmac_sha1 /;
 $tats->set_key( "myapp.sessions", hmac_sha1( $session->id, $my_secret_key );
 ```
 
-Note that the keys should be consistent across woprker processes and hosts.
+Note that the keys should be consistent across worker processes and hosts.
 
 When generating metric names based on untrusted sources (such as HTTP requests), ensure that the metrics contain only printable characters and do not contain colons (":") or pipes ("|"), since these are used by the statsd protocol.
 

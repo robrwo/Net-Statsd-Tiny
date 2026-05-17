@@ -14,6 +14,12 @@ use IO::Socket 1.18 ();
 
 our $VERSION = 'v0.3.9';
 
+=begin :prelude
+
+=for stopwords UDP multimetric compatability StatsD statsd
+
+=end :prelude
+
 =head1 SYNOPSIS
 
     use Net::Statsd::Tiny;
@@ -343,7 +349,7 @@ When using the L</set_add> method, be wary of exposing sensitive information lik
 
     $tats->set_key( "myapp.sessions", hmac_sha1( $session->id, $my_secret_key );
 
-Note that the keys should be consistent across woprker processes and hosts.
+Note that the keys should be consistent across worker processes and hosts.
 
 When generating metric names based on untrusted sources (such as HTTP requests), ensure that the metrics contain only printable characters and do not contain colons (":") or pipes ("|"), since these are used by the statsd protocol.
 
