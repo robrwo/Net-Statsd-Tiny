@@ -9,6 +9,7 @@ use warnings;
 
 use base qw/ Class::Accessor::Fast /;
 
+use Carp ();
 use IO::Socket 1.18 ();
 
 our $VERSION = 'v0.3.8';
@@ -290,6 +291,9 @@ sub decrement {
 
 sub _record {
     my ( $self, $suffix, $metric, $value ) = @_;
+
+    Carp::croak "malformed metric" if $metric =~ /[\N{U+00}-\N{U+1f}:|]/;
+    Carp::croak "malformed value"  if $value  =~ /[\N{U+00}-\N{U+1f}:|]/;
 
     my $data = $self->prefix . $metric . ':' . $value . $suffix . "\n";
 
