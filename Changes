@@ -10,7 +10,7 @@ Revision history for Net-Statsd-Tiny
 
   - Added a SECURITY CONSIDERATIONS section to the POD.
 
-  - Add a security policy.
+  - Added a security policy.
 
   - Documented the Perl version support policy.
 

@@ -55,7 +55,7 @@ Changes for version v0.3.8 (2026-05-17)
 - Documentation
     - Generate the README with the UsefulReadme plugin.
     - Added a SECURITY CONSIDERATIONS section to the POD.
-    - Add a security policy.
+    - Added a security policy.
     - Documented the Perl version support policy.
     - Updated copyright year.
     - Updated author email address.
