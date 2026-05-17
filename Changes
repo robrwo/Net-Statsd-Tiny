@@ -14,6 +14,8 @@ Revision history for Net-Statsd-Tiny
 
   - Updated author email address.
 
+  - Fixed SOURCE link.
+
   [Toolchain]
   - Stopped signing releases with Module::Signature.
 
