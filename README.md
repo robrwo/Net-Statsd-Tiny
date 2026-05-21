@@ -48,10 +48,10 @@ some daemons may ignore or reject this.
 
 # RECENT CHANGES
 
-Changes for version v0.4.0 (2026-05-21)
+Changes for version v0.4.1 (2026-05-21)
 
-- Enhancements
-    - A socket can be passed directly to the constructor.
+- Documentation
+    - Fixed typo in example.
 
 See the `Changes` file for more details.
 
@@ -112,7 +112,7 @@ use Digest::SHA qw/ hmac_sha1 /;
 
 ...
 
-$tats->set_key( "myapp.sessions", hmac_sha1( $session->id, $my_secret_key );
+$stats->set_key( "myapp.sessions", hmac_sha1( $session->id, $my_secret_key );
 ```
 
 Note that the keys should be consistent across worker processes and hosts.

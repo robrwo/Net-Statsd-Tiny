@@ -360,7 +360,7 @@ When using the L</set_add> method, be wary of exposing sensitive information lik
 
     ...
 
-    $tats->set_key( "myapp.sessions", hmac_sha1( $session->id, $my_secret_key );
+    $stats->set_key( "myapp.sessions", hmac_sha1( $session->id, $my_secret_key );
 
 Note that the keys should be consistent across worker processes and hosts.
 
