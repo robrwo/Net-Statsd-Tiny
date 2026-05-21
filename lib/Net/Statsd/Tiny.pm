@@ -317,7 +317,7 @@ sub _record {
     my $data = $self->prefix . $metric . ':' . $value . $suffix . "\n";
 
     if ( $self->autoflush ) {
-        send( $self->_socket, $data, 0 );
+        $self->_socket->send( $data, 0 );
         return;
     }
 
