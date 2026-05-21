@@ -12,7 +12,7 @@ use Carp ();
 use IO::Socket 1.18 ();
 use Socket 2.026 ();
 
-our $VERSION = 'v0.4.0';
+our $VERSION = 'v0.4.1';
 
 =begin :prelude
 
