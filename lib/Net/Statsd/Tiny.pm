@@ -105,11 +105,16 @@ sub new {
         $args{$attr} = $DEFAULTS{$attr};
     }
 
-    $args{_socket} = IO::Socket::INET->new(
-        PeerAddr => $args{host},
-        PeerPort => $args{port},
-        Proto    => $args{proto},
-    ) or die "Failed to initialize socket: $!";
+    if ( my $socket = delete $args{socket} ) {
+        $args{_socket} = $socket;
+    }
+    else {
+        $args{_socket} = IO::Socket::INET->new(
+            PeerAddr => $args{host},
+            PeerPort => $args{port},
+            Proto    => $args{proto},
+        ) or die "Failed to initialize socket: $!";
+    }
 
     my $self = $class->SUPER::new( \%args );
 
@@ -127,6 +132,14 @@ C<8125>.
 
 The network protocol that the statsd daemon is using. It defaults to
 C<udp>.
+
+=attr C<socket>
+
+Alternatively, you can pass an L<IO::Socket> instead of the L</host>, L</port> and L</protocol>.
+
+This will override other settings.
+
+Added in v0.4.0.
 
 =attr C<prefix>
 
