@@ -16,7 +16,7 @@ our $VERSION = 'v0.4.1';
 
 =begin :prelude
 
-=for stopwords UDP multimetric compatability StatsD statsd
+=for stopwords UDP multimetric compatability StatsD statsd proto
 
 =end :prelude
 
