@@ -10,7 +10,7 @@ Revision history for Net-Statsd-Tiny
   - Fixed flush method for alternative sockets.
 
   [Documentation]
-  - Fixed typo in example.
+  - Fixed typos.
 
   - Fixed inconsistent markup.
 

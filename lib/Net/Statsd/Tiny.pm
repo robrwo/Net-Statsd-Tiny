@@ -129,7 +129,7 @@ sub new {
 The port that the statsd daemon is listening on. It defaults to
 C<8125>.
 
-=attr protos
+=attr proto
 
 The network protocol that the statsd daemon is using. It defaults to
 C<udp>.

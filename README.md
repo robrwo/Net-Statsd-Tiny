@@ -56,7 +56,7 @@ Changes for version v0.4.1 (2026-05-22)
 - Bug Fixes
     - Fixed flush method for alternative sockets.
 - Documentation
-    - Fixed typo in example.
+    - Fixed typos.
     - Fixed inconsistent markup.
 
 See the `Changes` file for more details.
