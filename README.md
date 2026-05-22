@@ -52,6 +52,9 @@ Changes for version v0.4.1 (2026-05-22)
 
 - Enhancements
     - Use IO::Socket::IP instead of IO::Socket::INET.
+    - The socket attribute is public.
+- Bug Fixes
+    - Fixed flush method for alternative sockets.
 - Documentation
     - Fixed typo in example.
     - Fixed inconsistent markup.

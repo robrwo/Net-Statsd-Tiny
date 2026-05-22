@@ -77,7 +77,7 @@ The host of the statsd daemon. It defaults to C<127.0.0.1>.
 
 __PACKAGE__->mk_ro_accessors(
     qw/ host port proto prefix
-      autoflush max_buffer_size _socket /
+      autoflush max_buffer_size socket /
 );
 
 sub new {
@@ -106,10 +106,10 @@ sub new {
     }
 
     if ( my $socket = delete $args{socket} ) {
-        $args{_socket} = $socket;
+        $args{socket} = $socket;
     }
     else {
-        $args{_socket} = IO::Socket::IP->new(
+        $args{socket} = IO::Socket::IP->new(
             PeerHost    => $args{host},
             PeerService => $args{port},
             Proto       => $args{proto},
@@ -318,7 +318,7 @@ sub _record {
     my $data = $self->prefix . $metric . ':' . $value . $suffix . "\n";
 
     if ( $self->autoflush ) {
-        $self->_socket->send( $data, 0 );
+        $self->socket->send( $data, 0 );
         return;
     }
 
@@ -340,7 +340,7 @@ sub flush {
     my ($self) = @_;
 
     if ( length($self->{_buffer}) ) {
-        send( $self->_socket, $self->{_buffer}, 0 );
+        $self->socket->send( $self->{_buffer}, 0 );
         $self->{_buffer} = '';
     }
 }
