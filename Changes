@@ -4,6 +4,8 @@ Revision history for Net-Statsd-Tiny
   [Documentation]
   - Fixed typo in example.
 
+  - Fixed inconsistent markup.
+
 v0.4.0    2026-05-21 20:06:29+01:00 Europe/London
   [Enhancements]
   - A socket can be passed directly to the constructor.

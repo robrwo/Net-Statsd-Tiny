@@ -48,10 +48,11 @@ some daemons may ignore or reject this.
 
 # RECENT CHANGES
 
-Changes for version v0.4.1 (2026-05-21)
+Changes for version v0.4.1 (2026-05-22)
 
 - Documentation
     - Fixed typo in example.
+    - Fixed inconsistent markup.
 
 See the `Changes` file for more details.
 

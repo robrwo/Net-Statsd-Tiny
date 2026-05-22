@@ -69,7 +69,7 @@ some daemons may ignore or reject this.
 
 =head1 ATTRIBUTES
 
-=attr C<host>
+=attr host
 
 The host of the statsd daemon. It defaults to C<127.0.0.1>.
 
@@ -123,17 +123,17 @@ sub new {
     return $self;
 }
 
-=attr C<port>
+=attr port
 
 The port that the statsd daemon is listening on. It defaults to
 C<8125>.
 
-=attr C<proto>
+=attr protos
 
 The network protocol that the statsd daemon is using. It defaults to
 C<udp>.
 
-=attr C<socket>
+=attr socket
 
 Alternatively, you can pass an L<IO::Socket> instead of the L</host>, L</port> and L</protocol>.
 
@@ -141,11 +141,11 @@ This will override other settings.
 
 Added in v0.4.0.
 
-=attr C<prefix>
+=attr prefix
 
 The prefix to prepend to metric names. It defaults to a blank string.
 
-=attr C<autoflush>
+=attr autoflush
 
 A flag indicating whether metrics will be send immediately. It
 defaults to true.
@@ -159,13 +159,13 @@ regularly at the end of each task (e.g. a website request or job).
 Not all StatsD daemons support receiving multiple metrics in a single
 packet.
 
-=attr C<max_buffer_size>
+=attr max_buffer_size
 
 Specifies the maximum buffer size. It defaults to C<512>.
 
 =head1 METHODS
 
-=method C<counter>
+=method counter
 
   $stats->counter( $metric, $value, $rate );
 
@@ -175,12 +175,12 @@ name.
 If a C<$rate> is specified and less than 1, then a sampling rate will
 be added. C<$rate> must be between 0 and 1.
 
-=method C<update>
+=method update
 
 This is an alias for L</counter>, for compatability with
 L<Etsy::StatsD> or L<Net::Statsd::Client>.
 
-=method C<increment>
+=method increment
 
   $stats->increment( $metric, $rate );
 
@@ -188,7 +188,7 @@ This is an alias for
 
   $stats->counter( $metric, 1, $rate );
 
-=method C<decrement>
+=method decrement
 
   $stats->decrement( $metric, $rate );
 
@@ -196,7 +196,7 @@ This is an alias for
 
   $stats->counter( $metric, -1, $rate );
 
-=method C<metric>
+=method metric
 
   $stats->metric( $metric, $value );
 
@@ -205,7 +205,7 @@ is appropriate for counters that will never decrease (e.g. the number
 of requests processed.)  However, this metric type is not supported by
 many StatsD daemons.
 
-=method C<gauge>
+=method gauge
 
   $stats->gauge( $metric, $value );
 
@@ -217,7 +217,7 @@ is prefixed by a "+", then the gauge is incremented by that amount,
 and if the number is prefixed by a "-", then the gauge is decremented
 by that amount.
 
-=method C<timing>
+=method timing
 
   $stats->timing( $metric, $value, $rate );
 
@@ -233,12 +233,12 @@ If a C<$rate> is specified and less than 1, then a sampling rate will
 be added. C<$rate> must be between 0 and 1.  Note that sampling
 rates for timings may not be supported by all statsd servers.
 
-=method C<timing_ms>
+=method timing_ms
 
 This is an alias for L</timing>, for compatability with
 L<Net::Statsd::Client>.
 
-=method C<histogram>
+=method histogram
 
   $stats->histogram( $metric, $value );
 
@@ -246,7 +246,7 @@ This logs a value so that statistics about the metric can be
 gathered. The C<$value> must be a positive number, although the
 specification recommends that integers be used.
 
-=method C<set_add>
+=method set_add
 
   $stats->set_add( $metric, $string );
 
@@ -328,7 +328,7 @@ sub _record {
 }
 
 
-=method C<flush>
+=method flush
 
 This sends the buffer to the L</host> and empties the buffer, if there
 is any data in the buffer.
