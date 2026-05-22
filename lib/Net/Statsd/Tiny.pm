@@ -9,7 +9,7 @@ use warnings;
 use parent qw/ Class::Accessor::Fast /;
 
 use Carp ();
-use IO::Socket 1.18 ();
+use IO::Socket::IP qw( SOCK_DGRAM );
 use Socket 2.026 ();
 
 our $VERSION = 'v0.4.1';
@@ -109,10 +109,11 @@ sub new {
         $args{_socket} = $socket;
     }
     else {
-        $args{_socket} = IO::Socket::INET->new(
-            PeerAddr => $args{host},
-            PeerPort => $args{port},
-            Proto    => $args{proto},
+        $args{_socket} = IO::Socket::IP->new(
+            PeerHost    => $args{host},
+            PeerService => $args{port},
+            Proto       => $args{proto},
+            Type        => SOCK_DGRAM,
         ) or die "Failed to initialize socket: $!";
     }
 

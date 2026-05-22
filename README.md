@@ -50,6 +50,8 @@ some daemons may ignore or reject this.
 
 Changes for version v0.4.1 (2026-05-22)
 
+- Enhancements
+    - Use IO::Socket::IP instead of IO::Socket::INET.
 - Documentation
     - Fixed typo in example.
     - Fixed inconsistent markup.
@@ -62,7 +64,7 @@ This module lists the following modules as runtime dependencies:
 
 - [Carp](https://metacpan.org/pod/Carp)
 - [Class::Accessor::Fast](https://metacpan.org/pod/Class%3A%3AAccessor%3A%3AFast)
-- [IO::Socket](https://metacpan.org/pod/IO%3A%3ASocket) version 1.18 or later
+- [IO::Socket::IP](https://metacpan.org/pod/IO%3A%3ASocket%3A%3AIP)
 - [Socket](https://metacpan.org/pod/Socket) version 2.026 or later
 - [parent](https://metacpan.org/pod/parent)
 - [perl](https://metacpan.org/pod/perl) version v5.12.0 or later

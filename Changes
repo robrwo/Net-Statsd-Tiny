@@ -1,6 +1,9 @@
 Revision history for Net-Statsd-Tiny
 
 {{$NEXT}}
+  [Enhancements]
+  - Use IO::Socket::IP instead of IO::Socket::INET.
+
   [Documentation]
   - Fixed typo in example.
 
