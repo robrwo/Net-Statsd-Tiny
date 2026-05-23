@@ -48,7 +48,7 @@ some daemons may ignore or reject this.
 
 # RECENT CHANGES
 
-Changes for version v0.4.1 (2026-05-22)
+Changes for version v0.4.1 (2026-05-23)
 
 - Enhancements
     - Use IO::Socket::IP instead of IO::Socket::INET.
